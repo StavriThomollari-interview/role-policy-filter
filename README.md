@@ -38,13 +38,13 @@ permissions =  {
 
 To address this need, we developed a centralized way to read permissions and dynamically generate the appropriate query based on the defined rules. The goal was to create a flexible solution that could produce an `ActiveRecord::Relation`, which could be returned to the controller, allowing for further query modifications if needed.
 
-For this we created **RolePolicy::Filter:**
+For this we created **RolePolicyFilter:**
 
 The intent behind this was to centralize the permission logic without requiring any changes to the existing endpoints. Given that we had over 60 to 70 endpoints in the system, the solution needed to seamlessly integrate into the existing infrastructure. 
 before any action in the controllers can be called, we run:
 
 ```ruby
-RolePolicy::Filter.new(model_name, permissions, custom_permssions, user_role).run
+RolePolicyFilter.new(model_name, permissions, custom_permssions, user_role).run
 ```
 
 In this approach, **`model_name`** refers to the name of the model or resource that needs to be filtered based on the defined permissions.
